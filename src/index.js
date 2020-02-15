@@ -23,6 +23,11 @@ export var findSiblings = function( el ):Siblings {
 		! el.nodeType !== 1 ||
 		! el.nodeType !== 3 ||
 		! el.nodeType !== 9 ) {
+
+		if ( ! PRODUCTION ) {
+			throw new Error( 'INVALID ARGUMENT TYPE' )
+		}
+
 		return false
 	}
 
