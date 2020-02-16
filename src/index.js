@@ -16,7 +16,8 @@ interface Siblings {
 	siblings: Array<Node>
 }
 
-export var findSiblings = function( el ):Siblings {
+// really good stack traces
+export var findSiblings = function findSiblings( el ):Siblings {
 
 	if ( ! el ||
 		! el.nodeType ||
@@ -51,7 +52,9 @@ export var findSiblings = function( el ):Siblings {
 
 }
 
-export var filterEl = function( parent, el ) {
+export var filterEl = function filterEl( 
+	parent, 
+	el ) {
 
 	if ( ! el ||
 		 ! el.nodeType ) {
@@ -66,4 +69,31 @@ export var filterEl = function( parent, el ) {
 	}
 
 	return false
+}
+
+export var findAdjacentSibling = function findAdjacentSibling( 
+	parent, 
+	el ) {
+
+	if ( ! el ||
+		  ! el.nodeType !== 1 ) {
+
+		return false
+	}
+
+	if ( parent.chilren &&
+			parent.children[ 0 ] ) {
+
+		for ( let i = 0; i < parent.children.length; i++ ) {
+			if (parent.children[ i ] === el ) {
+				return parent.children[ i + 1 ]
+			}
+		}
+
+		return false
+
+	}
+
+	return false
+
 }
