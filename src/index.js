@@ -8,7 +8,7 @@ const PRODUCTION = false
 /**
  * ______________________________________________
  *
- * Function Declarations
+ * Type Declarations
  */
 
 interface Siblings {
@@ -16,7 +16,21 @@ interface Siblings {
 	siblings: Array<Node>
 }
 
-// really good stack traces
+/**
+ * ______________________________________________
+ *
+ *  Function Declarations
+ *
+ *  Using non-anonymous functions leads to very nice
+ *  stack traces. 
+ */
+
+/**
+ * 
+ * @param  {Node} parent
+ * @param  {Node|String} el
+ * @return {Siblings}
+ */
 export var findSiblings = function findSiblings( el ):Siblings {
 
 	if ( ! el ||
@@ -52,6 +66,12 @@ export var findSiblings = function findSiblings( el ):Siblings {
 
 }
 
+/**
+ * 
+ * @param  {Node} parent
+ * @param  {Node|String} el
+ * @return {Bool}
+ */
 export var filterEl = function filterEl( 
 	parent, 
 	el ) {
@@ -71,6 +91,12 @@ export var filterEl = function filterEl(
 	return false
 }
 
+/**
+ * 
+ * @param  {Node} parent
+ * @param  {Node|String} el
+ * @return {Node|Bool}
+ */
 export var findAdjacentSibling = function findAdjacentSibling( 
 	parent, 
 	el ) {
@@ -96,4 +122,46 @@ export var findAdjacentSibling = function findAdjacentSibling(
 
 	return false
 
+}
+
+export var findSiblingsWithClassName = function findSiblingsIfInNode(
+	): Object {
+
+}
+
+/**
+ * 
+ * @param  {Node} parent
+ * @param  {Node} el
+ * @param  {String} attr
+ * @return {Siblings} 
+ */
+export var findSiblingsWithAtt = function findSiblingsWIthAttr(
+	parent: Object,
+	el: Object,
+	attr: String
+) {
+	if ( ! el ||
+		 ! el.nodeType !== 1 ||
+		 ! el.nodeType !== 9 ) {
+
+		return false;
+
+	}
+
+	let out: Siblings = []
+
+	if ( parent.children ) {
+
+		for ( let i = 0; i < parent.children.length; i++ ) {
+			let child = parent.children[ i ];
+
+			if ( child !== el 
+			 && child.dataset[ attr ] ) {
+				out.push( child )
+			}
+		}
+	}
+
+	return out;
 }
