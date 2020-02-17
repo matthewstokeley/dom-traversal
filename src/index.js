@@ -156,7 +156,7 @@ export var findSiblingsCache = function cached (
  * @param  {String} attr
  * @return {Siblings} 
  */
-export var findSiblingsWithAtt = function findSiblingsWIthAttr(
+export var findSiblingsWithAtt = function findSiblingsWithAttr(
 	parent: Object,
 	el: Object,
 	attr: String
@@ -178,6 +178,37 @@ export var findSiblingsWithAtt = function findSiblingsWIthAttr(
 
 			if ( child !== el 
 			 && child.dataset[ attr ] ) {
+				out.push( child )
+			}
+		}
+	}
+
+	return out;
+}
+
+export var findSiblingsWithoutAttr = function findSiblingsWIthoutAttr(
+	parent: Object,
+	el: Object,
+	attr: String
+) {
+
+	if ( ! el ||
+		 ! el.nodeType !== 1 ||
+		 ! el.nodeType !== 9 ) {
+
+		return false;
+
+	}
+
+	let out: Siblings = []
+
+	if ( parent.children ) {
+
+		for ( let i = 0; i < parent.children.length; i++ ) {
+			let child = parent.children[ i ];
+
+			if ( child !== el )
+			 && ! child.dataset[ attr ] ) {
 				out.push( child )
 			}
 		}
