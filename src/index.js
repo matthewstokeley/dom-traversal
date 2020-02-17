@@ -130,6 +130,26 @@ export var findSiblingsWithClassName = function findSiblingsIfInNode(
 }
 
 /**
+ * cache siblings query with a resolver 
+ * 
+ * @param  {Function} fn 
+ * @param  {Function} resolver 
+ * @return {Function} 
+ */
+export var findSiblingsCache = function cached (
+  fn: Function,
+  resolver: Function
+): Function {
+   const cache = new WeakMap()
+   return (function( siblings: Siblings ) {
+     const key = resolver ? resolver(str) : str
+     return cache.has(key) 
+       ? cache.get(key)
+       : cache.set(key, fn(str))
+    })
+}
+
+/**
  * 
  * @param  {Node} parent
  * @param  {Node} el
