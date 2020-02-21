@@ -263,6 +263,14 @@ export var isNodeParent = function isNodeParent(
 
 }
 
+/**
+ * 
+ * @param {Object} 
+ * @param {Object} 
+ * @param {String}
+ *
+ * @return {Siblings|Bool}
+ */
 export var findSiblingsWithoutAttr = function findSiblingsWIthoutAttr(
 	parent: Object,
 	el: Object,
@@ -294,6 +302,15 @@ export var findSiblingsWithoutAttr = function findSiblingsWIthoutAttr(
 	return out;
 }
 
+/**
+ * 
+ * @param  {Node}
+ * @param  {Node}
+ * @param  {DataAttribute}
+ * 
+ * @return {Bool}
+ */
+
 export var doesChildHaveAttr = function doesChildHAveAttr( 
 	node: Node, 
 	el: Node, 
@@ -320,11 +337,19 @@ export var doesChildHaveAttr = function doesChildHAveAttr(
 
 }
 
+/**
+ * 
+ * @param  {Node} 
+ * @param  {DataAttribute}
+ * 
+ * @return {Children|Bool}
+ */
+
 export var findChildrenWithAttr = function findChildrenWithAttr(
 	node: Node,
 	attr: DataAttribute
 
-	): Children {
+	): Children | Bool {
 
 	let res: Children = []
 
@@ -336,5 +361,37 @@ export var findChildrenWithAttr = function findChildrenWithAttr(
 	let _children = Array.prototype.splice.call( node.children )
 
 	return res = _children.filter( ( val ) => { val.dataset[ attr.name ] } )
+
+}
+
+/**
+ * 
+ * @param {Node}
+ * @param {Node}
+ * @param {DataAttribute}
+ *
+ * @return {Node|Bool}
+ */
+export var findAdjacentChildWithAttr = function findAdjacentChildWithAttr(
+	node: Node,
+	el: Node,
+	attr: DataAttribute
+
+	): Node | Bool {
+
+
+	if ( ! node ||
+		 ! node.nodeType ) {
+		return false
+	}
+
+	if ( el.nodeType === 9 &&
+	     el.dataset[ attr.name ] ) {
+
+		return el.nextSibling()
+
+	}
+
+	return false
 
 }
