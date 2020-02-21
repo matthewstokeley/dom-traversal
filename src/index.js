@@ -20,6 +20,10 @@ interface DataAttribute {
 	name: String
 }
 
+interface Children {
+
+}
+
 /**
  * ______________________________________________
  *
@@ -243,6 +247,7 @@ export var isNodeParent = function isNodeParent(
 		return false
 	}
 
+
 	if ( el.nodeType === 9 ) {
 
 		for ( let i = 0; i < node.children; i++ ) {
@@ -250,6 +255,8 @@ export var isNodeParent = function isNodeParent(
 				return true
 			}
 		}
+
+
 
 	}
 	return false
@@ -287,7 +294,7 @@ export var findSiblingsWithoutAttr = function findSiblingsWIthoutAttr(
 	return out;
 }
 
-export var doesChildHaveAttr = function doesCHildHAveAttr( 
+export var doesChildHaveAttr = function doesChildHAveAttr( 
 	node: Node, 
 	el: Node, 
 	attr: DataAttribute ): Bool {
@@ -301,7 +308,7 @@ export var doesChildHaveAttr = function doesCHildHAveAttr(
 
 		let res = []
 
-		let _arr = Array.prototype.splice.call(node.children)
+		let _arr = Array.prototype.splice.call( node.children )
 
 		res = _arr.filter( ( value ) => {
 			if ( value === el )
@@ -313,3 +320,21 @@ export var doesChildHaveAttr = function doesCHildHAveAttr(
 
 }
 
+export var findChildrenWithAttr = function findChildrenWithAttr(
+	node: Node,
+	attr: DataAttribute
+
+	): Children {
+
+	let res: Children = []
+
+	if ( ! node || 
+		 ! node.nodeType !== 9 ) {
+		return false
+	}
+
+	let _children = Array.prototype.splice.call( node.children )
+
+	return res = _children.filter( ( val ) => { val.dataset[ attr.name ] } )
+
+}
