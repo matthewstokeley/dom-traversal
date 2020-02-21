@@ -16,6 +16,10 @@ interface Siblings {
 	siblings: Array<Node>
 }
 
+interface DataAttribute {
+	name: String
+}
+
 /**
  * ______________________________________________
  *
@@ -186,6 +190,72 @@ export var findSiblingsWithAtt = function findSiblingsWithAttr(
 	return out;
 }
 
+/**
+ * 
+ * 
+ * @param {Object} parent 
+ * @param {Object} el
+ * @param {String} classNamn
+ * @return {Array|Bool}
+ */
+export var findSiblingsWithClassName = function findSiblingsWithClassName(
+	parent: Object,
+	el: Object,
+	className: String
+	) {
+ 
+	if ( ! el || 
+		 ! el.nodeType !== 9 ) {
+		return false
+	}
+
+	if ( parent.children ) {
+
+		let arr = Array.prototype.splice.call( parent.children )
+
+		return arr.filter( ( vel, index, array ) => {
+
+			if ( val !== el && 
+				 val.className.has( className ) ) {
+				return true
+			}
+		} )
+
+	}
+
+	return false
+
+}
+
+export var findSiblingsWithoutClassName = function findSiblingsWithoutClassName(
+
+) {
+
+}
+
+export var isNodeParent = function isNodeParent( 
+	node: Object,
+	el: Object
+): Bool {
+
+	if ( ! node ||
+		 ! node.children ) {
+		return false
+	}
+
+	if ( el.nodeType === 9 ) {
+
+		for ( let i = 0; i < node.children; i++ ) {
+			if ( node.children[ i ] === el ) {
+				return true
+			}
+		}
+
+	}
+	return false
+
+}
+
 export var findSiblingsWithoutAttr = function findSiblingsWIthoutAttr(
 	parent: Object,
 	el: Object,
@@ -216,3 +286,30 @@ export var findSiblingsWithoutAttr = function findSiblingsWIthoutAttr(
 
 	return out;
 }
+
+export var doesChildHaveAttr = function doesCHildHAveAttr( 
+	node: Node, 
+	el: Node, 
+	attr: DataAttribute ): Bool {
+
+	if ( ! el || 
+		 ! el.nodeType === 9 ) 
+		return false
+
+	if ( node.childen &&
+			node.childrem.length > 0 ) {
+
+		let res = []
+
+		let _arr = Array.prototype.splice.call(node.children)
+
+		res = _arr.filter( ( value ) => {
+			if ( value === el )
+				return true
+		} )
+
+		return ( res.length > 0 )
+	}
+
+}
+
