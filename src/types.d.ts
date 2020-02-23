@@ -1,12 +1,16 @@
-export interface Node {
-	nodeType: Number
-}
+declare namespace DOMTraversal {
+	
+	interface Node {
+		nodeType: Number
+	}
 
-export interface Element {
-	el: String
-}
+	interface Element {
+		el: String
+	}
 
-export interface Siblings {
-	el: HTMLCollection,
-	siblings: Array<Node>
+	interface Siblings {
+		el: HTMLCollection,
+		siblings: Array<Node>
+	}
+
 }

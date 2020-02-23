@@ -35,8 +35,9 @@ interface Children {
 
 /**
  * 
- * @param  {Node} parent
- * @param  {Node|String} el
+ * @param  {Node}
+ * @param  {Node|String}
+ * 
  * @return {Siblings}
  */
 export var findSiblings = function findSiblings( el ):Siblings {
@@ -76,8 +77,9 @@ export var findSiblings = function findSiblings( el ):Siblings {
 
 /**
  * 
- * @param  {Node} parent
- * @param  {Node|String} el
+ * @param  {Node}
+ * @param  {Node|String}
+ * 
  * @return {Bool}
  */
 export var filterEl = function filterEl( 
@@ -101,8 +103,9 @@ export var filterEl = function filterEl(
 
 /**
  * 
- * @param  {Node} parent
- * @param  {Node|String} el
+ * @param  {Node}
+ * @param  {Node|String}
+ * 
  * @return {Node|Bool}
  */
 export var findAdjacentSibling = function findAdjacentSibling( 
@@ -140,8 +143,9 @@ export var findSiblingsWithClassName = function findSiblingsIfInNode(
 /**
  * cache siblings query with a resolver 
  * 
- * @param  {Function} fn 
- * @param  {Function} resolver 
+ * @param  {Function}
+ * @param  {Function}
+ * 
  * @return {Function} 
  */
 export var findSiblingsCache = function cached (
@@ -159,9 +163,10 @@ export var findSiblingsCache = function cached (
 
 /**
  * 
- * @param  {Node} parent
- * @param  {Node} el
- * @param  {String} attr
+ * @param  {Node}
+ * @param  {Node}
+ * @param  {String}
+ * 
  * @return {Siblings} 
  */
 export var findSiblingsWithAtt = function findSiblingsWithAttr(
@@ -197,9 +202,10 @@ export var findSiblingsWithAtt = function findSiblingsWithAttr(
 /**
  * 
  * 
- * @param {Object} parent 
- * @param {Object} el
- * @param {String} classNamn
+ * @param {Object} 
+ * @param {Object}
+ * @param {String}
+ * 
  * @return {Array|Bool}
  */
 export var findSiblingsWithClassName = function findSiblingsWithClassName(
@@ -285,15 +291,13 @@ export var findSiblingsWithoutAttr = function findSiblingsWIthoutAttr(
 
 	}
 
-	let out: Siblings = []
-
 	if ( parent.children ) {
 
-		for ( let i = 0; i < parent.children.length; i++ ) {
+		for ( let i = 0, out: Siblings = []; i < parent.children.length; i++ ) {
 			let child = parent.children[ i ];
 
-			if ( child !== el )
-			 && ! child.dataset[ attr ] ) {
+			if ( child !== el && 
+				 ! child.dataset[ attr ] ) {
 				out.push( child )
 			}
 		}
