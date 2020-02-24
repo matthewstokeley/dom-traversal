@@ -376,7 +376,7 @@ export var findChildrenWithAttr = function findChildrenWithAttr(
  *
  * @return {Node|Bool}
  */
-export var findAdjacentChildWithAttr = function findAdjacentChildWithAttr(
+export var findAdjacentSiblingWithAttr = function findAdjacentSiblingWithAttr(
 	node: Node,
 	el: Node,
 	attr: DataAttribute
@@ -395,6 +395,79 @@ export var findAdjacentChildWithAttr = function findAdjacentChildWithAttr(
 		return el.nextSibling()
 
 	}
+
+	return false
+
+}
+
+/**
+ * 
+ * @param {Node}          node
+ * @param {Node}          parent
+ * @param {DataAttribute} attr
+ *
+ * @return {Node}
+ */
+export var findAdjacentSiblingWhenChildContainsAttr = function (
+	node: Node,
+	parent: Node,
+	attr: DataAttribute
+	) {
+
+	if ( ! node ||
+		 node.nodeType !== 1 ) {
+		return false
+	}
+
+	let childHasAttr = false
+
+	if ( node.children[ 0 ] ) {
+
+		for ( let i = 0; i < node.children.length; i++ ) {
+			if ( node.children[ 0 ].dataset[ attr ] ) 
+				childHasAttr = true
+		}
+
+	}
+
+	return ( childHasAttr )
+		? node.nextSibling()
+		: node
+
+}
+
+/**
+ *
+ * @param {Node}
+ * @param {Node}
+ * @param {DataAttribute}
+ *
+ * @return {Sibling|Bool} returns sibling or false
+ */
+export var findAdjacentSiblingWhenSiblingContainsChildWithAttr = function(
+	node: Node,
+	parent: Node,
+	attr: DataAttribute
+) {
+	if ( ! node || 
+		 ! node.nodeType ) {
+		return false
+	} 
+
+	let siblingHasChildWithAttr = false
+
+	let sibling = node.nextSibling()
+
+	if ( sibling.children[ 0 ] ) {
+
+		// iterate HTMLCollection without casting to array
+		for ( let i = 0; i < sibling.children.length; i++ ) {
+			if ( sibling.children[ i ].dataset[ attr ] ) {
+				return sibling
+			}
+		}
+	
+	} 
 
 	return false
 
