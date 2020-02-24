@@ -16,6 +16,8 @@ interface Siblings {
 	siblings: Array<Node>
 }
 
+type Sibling: Object;
+
 interface DataAttribute {
 	name: String
 }
@@ -460,7 +462,7 @@ export var findAdjacentSiblingWhenSiblingContainsChildWithAttr = function(
 
 	if ( sibling.children[ 0 ] ) {
 
-		// iterate HTMLCollection without casting to array
+		// iterate through HTMLCollection without casting to array
 		for ( let i = 0; i < sibling.children.length; i++ ) {
 			if ( sibling.children[ i ].dataset[ attr ] ) {
 				return sibling
@@ -470,5 +472,50 @@ export var findAdjacentSiblingWhenSiblingContainsChildWithAttr = function(
 	} 
 
 	return false
+}
+
+/**
+ * 
+ * @param {Node}
+ * @param {Node}
+ * @param {DataAttribute}
+ *
+ * @return {Sibling}
+ */
+export var findSiblingIfContainsChildWithAttr = function(
+	node: Node,
+	parent: Node,
+	attr: DataAttribute
+) {
+
+	if ( ! parent ||
+		 ! parent.nodeType ) {
+		return false
+	}
+
+	let _filter = ( el, attr ) => {
+		let _el = Array.prototype.splice.call( el );
+		
+		_el.filter( ( value, index ) => ( value.dataset[ attr ] ) ? true : false )
+	}
+
+	let sibling = {}
+
+	let res = []
+
+	for ( let i = 0; i < parent.children.length; i++ ) {
+
+		if ( parent.children[ i ] !== node ) {
+			res.push( _filter( parent.children[ i ], attr ) )
+			// @todo kind of wonky
+			sibling = parent.children[ i ]
+		}
+
+	}
+
+	return ( res.length > 0 )
+		? sibling
+		: {}
+
 
 }
