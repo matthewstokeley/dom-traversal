@@ -518,5 +518,27 @@ export var findSiblingIfContainsChildWithAttr = function(
 		? sibling
 		: {}
 
+}
+
+export var findAdjancentSiblingIfNodeHasClassName = function(
+	node: Node,
+	parent: Node,
+	className: String
+	) {
+
+	if ( ! node ||
+		 ! node.nodeType || 
+		 ! parent.contains( node ) ) {
+		return false
+	}
+
+	let hasName = () => {
+		return ( node.classList )
+			? node.classList.contains( className )
+			: node.className.indexof( className ) !== -1
+	}
+
+	return node.nextSibling()
+
 
 }

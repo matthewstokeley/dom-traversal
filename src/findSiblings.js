@@ -4,7 +4,7 @@
  * @param  {Node|String} el
  * @return {Siblings}
  */
-export default var findSiblings = function findSiblings( el ):Siblings {
+export var findSiblings = function findSiblings( el ):Siblings {
 
 	if ( ! el ||
 		! el.nodeType ||
@@ -25,7 +25,7 @@ export default var findSiblings = function findSiblings( el ):Siblings {
 
 	res.el = el
 
-	if ( node && node.children ) {
+	if ( node && node.hasChildren() ) {
 
 		let filter = ( child ) => child === el
 
@@ -38,3 +38,4 @@ export default var findSiblings = function findSiblings( el ):Siblings {
 	return res
 
 }
+
