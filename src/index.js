@@ -539,6 +539,4 @@ export var findAdjancentSiblingIfNodeHasClassName = function(
 	}
 
 	return node.nextSibling()
-
-
 }
