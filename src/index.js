@@ -63,7 +63,7 @@ export var findSiblings = function findSiblings( el ):Siblings {
 
 	res.el = el
 
-	if ( node && node.children ) {
+	if ( node && node.hasChildNodes() ) {
 
 		let filter = ( child ) => child === el
 
@@ -93,7 +93,8 @@ export var filterEl = function filterEl(
 		return false
 	}
 
-	if ( parent.children[ 0 ] ) {
+	if ( parent.hasChildNodes() ) {
+
 		for ( let i = 0; i < parent.children.length) {
 			if ( parent.children[ i ] === el )
 				return true
@@ -186,7 +187,7 @@ export var findSiblingsWithAtt = function findSiblingsWithAttr(
 
 	let out: Siblings = []
 
-	if ( parent.children ) {
+	if ( parent.hasChildNodes() ) {
 
 		for ( let i = 0; i < parent.children.length; i++ ) {
 			let child = parent.children[ i ];
@@ -221,7 +222,7 @@ export var findSiblingsWithClassName = function findSiblingsWithClassName(
 		return false
 	}
 
-	if ( parent.children ) {
+	if ( parent.hasChildNodes() ) {
 
 		let arr = Array.prototype.splice.call( parent.children )
 
@@ -293,7 +294,7 @@ export var findSiblingsWithoutAttr = function findSiblingsWIthoutAttr(
 
 	}
 
-	if ( parent.children ) {
+	if ( parent.hasChildNodes() ) {
 
 		for ( let i = 0, out: Siblings = []; i < parent.children.length; i++ ) {
 			let child = parent.children[ i ];
@@ -410,7 +411,7 @@ export var findAdjacentSiblingWithAttr = function findAdjacentSiblingWithAttr(
  *
  * @return {Node}
  */
-export var findAdjacentSiblingWhenChildContainsAttr = function (
+export var findAdjacentSiblingWhenChildHasAttr = function (
 	node: Node,
 	parent: Node,
 	attr: DataAttribute
@@ -423,10 +424,10 @@ export var findAdjacentSiblingWhenChildContainsAttr = function (
 
 	let childHasAttr = false
 
-	if ( node.children[ 0 ] ) {
+	if ( node.hasChildNodes() ) {
 
 		for ( let i = 0; i < node.children.length; i++ ) {
-			if ( node.children[ 0 ].dataset[ attr ] ) 
+			if ( node.children[ i ].dataset[ attr ] ) 
 				childHasAttr = true
 		}
 
@@ -460,7 +461,7 @@ export var findAdjacentSiblingWhenSiblingContainsChildWithAttr = function(
 
 	let sibling = node.nextSibling()
 
-	if ( sibling.children[ 0 ] ) {
+	if ( sibling.hasChildNodes() ) {
 
 		// iterate through HTMLCollection without casting to array
 		for ( let i = 0; i < sibling.children.length; i++ ) {
