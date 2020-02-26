@@ -540,3 +540,64 @@ export var findAdjancentSiblingIfNodeHasClassName = function(
 
 	return node.nextSibling()
 }
+
+let castClassName = ( className: String ) => {
+	return className.split( ' ' )
+}
+
+let filterClassName = ( 
+	node: Node, 
+	className: String ) => {
+
+	if ( ! node.nodeType ) {
+		return false
+	}
+
+	let _arr = castClassName( node.className )
+
+	return _arr.filter( ( val ) => val === className )
+} 
+
+export var findAllSiblingsIfNodeHasClassName = function(
+
+	node: Node,
+	parent: Node,
+	className: String
+
+	) {
+
+
+	if ( ! node ||
+		 ! node.nodeType ||
+		 ! parent.contains( Node ) ) {
+
+		return false
+
+	}
+
+	let filter = ( node, className ) => { 
+		return ( node.classList ) 
+			? node.classList.contains( className )
+			: node.className.indexOf( className ) !== -1
+	}
+
+	let siblings: Siblings
+
+	if ( filter( node, className ) ) {
+
+		for ( let i = 0; i < parent.children.length; i++ ) {
+			if ( parent.children[ i ] !== node ) {
+				siblings.push( parent.children[ i ] )
+			}
+		}
+	}
+
+	return siblings
+
+}
+
+export var findAllChildrenIfAnyChildHasClassName = function(
+
+	) {
+
+}
