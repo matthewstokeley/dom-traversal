@@ -595,9 +595,3 @@ export var findAllSiblingsIfNodeHasClassName = function(
 	return siblings
 
 }
-
-export var findAllChildrenIfAnyChildHasClassName = function(
-
-	) {
-
-}
