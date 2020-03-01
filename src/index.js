@@ -520,6 +520,14 @@ export var findSiblingIfContainsChildWithAttr = function(
 
 }
 
+/**
+ * [function description]
+ * @param {Node}   node      [description]
+ * @param {Node}   parent    [description]
+ * @param {String} className [description]
+ *
+ * @return {Node|Bool}
+ */
 export var findAdjancentSiblingIfNodeHasClassName = function(
 	node: Node,
 	parent: Node,
@@ -538,7 +546,24 @@ export var findAdjancentSiblingIfNodeHasClassName = function(
 			: node.className.indexof( className ) !== -1
 	}
 
-	return node.nextSibling()
+	let index
+
+	if ( parent.nodeType &&
+			parent.children &&
+			parent.children[ 0 ] ) {
+
+		for ( let i = 0; i < parent.children.length; i++ ) {
+			if ( parent.children[ i ] === node ) {
+				index = i + 1
+			}
+		}
+	}
+
+	return ( index )
+				? parent.children[ index ]
+				: false
+
+	//return node.nextSibling()
 }
 
 let castClassName = ( className: String ) => {
@@ -595,3 +620,6 @@ export var findAllSiblingsIfNodeHasClassName = function(
 	return siblings
 
 }
+
+export var findParentSiblingIfContainsAttr = function(
+) {}
