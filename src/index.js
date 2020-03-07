@@ -576,7 +576,7 @@ let filterClassName = (
 
 	if ( ! node.nodeType ) {
 		return false
-	}
+	}x
 
 	let _arr = castClassName( node.className )
 
@@ -621,5 +621,19 @@ export var findAllSiblingsIfNodeHasClassName = function(
 
 }
 
-export var findParentSiblingIfContainsAttr = function(
-) {}
+export var findParentAdjacentSiblingIfContainsAttr = function(
+	node: Node,
+	parent: Parent, 
+	attr: Attr
+) {
+
+	if ( node.nodeType === 1 ) {
+		if ( node.dataset[ attr ] ) {
+			return parent.nextSibling()
+		}
+	}
+
+	return false
+}
+
+
